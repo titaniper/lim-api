@@ -6,10 +6,11 @@ import { Container } from 'typedi';
 
 async function main() {
     const port = config.server.port;
-    const server = app.listen(port);
-
     // NOTE: 임시 주입
     Container.set(OpenApiClient, new OpenApiClient(config.openApi.token));
+
+
+    const server = app.listen(port);
 
     gracefulShutdown(server, {
         signals: 'SIGINT SIGTERM',
