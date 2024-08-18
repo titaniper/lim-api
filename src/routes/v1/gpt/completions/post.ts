@@ -13,7 +13,6 @@ router.post('/gpt', async (ctx) => {
     const client = Container.get(OpenApiClient).getClient();
 
     // 2.2 서비스 params 선언
-    // @ts-expect-error
     const props = ctx.request.body;
 
     // let result = '';
@@ -36,55 +35,5 @@ router.post('/gpt', async (ctx) => {
     // ctx.body = result;
     ctx.status = 200;
 });
-
-// const bodySchema = Joi.object({
-//     message: Joi.string().required(),
-// });
-
-// const validate = {
-//     body: bodySchema,
-// } as const;
-
-// export default {
-//     path: '/gpt/completions',
-//     method: 'post',
-//     meta: {
-//         document: {
-//             summary: 'GPT',
-//             description: '',
-//             tags: ['gpt'],
-//         },
-//     },
-//     validate,
-//     handler: async (ctx) => {
-        // // 1. ctx destructuring
-        // const { context } = ctx.state;
-
-        // // 2. 서비스 호출
-        // // 2.1 서비스 객체 획득
-        // const client = Container.get(OpenApiClient).getClient();
-
-        // // 2.2 서비스 params 선언
-        // const props: Joi.extractType<typeof bodySchema> = ctx.request.body;
-
-        // let result = '';
-        // // 2.3 서비스 호출
-
-        // const stream = await client.chat.completions.create({
-        //     model: 'gpt-4o',
-        //     messages: [{ role: 'user', content: '대한민국은 어디있나?' }],
-        //     stream: true,
-        // });
-        // for await (const chunk of stream) {
-        //     result += chunk.choices[0]?.delta?.content || ''; 
-        //     console.log(chunk.choices[0]?.delta?.content || '')
-        //     // process.stdout.write(chunk.choices[0]?.delta?.content || '');
-        // }
-
-        // // 3. 서비스 결과 값 body로 설정
-        // ctx.body = result;
-        // ctx.status = 200;
-//     },
-// };
 
 export const privateGptRoutes = router.routes();
